@@ -1,1 +1,1 @@
-web: gunicorn local.wsgi
+web: gunicorn madrasa_backend.wsgi
