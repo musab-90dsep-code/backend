@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,19 +32,18 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'cloudinary_storage', # এটি সবার উপরে থাকবে
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # এটি cloudinary_storage এর নিচে
+    'cloudinary',
     'rest_framework',
     'corsheaders',
     'api',
     'whitenoise.runserver_nostatic',
-    'cloudinary_storage',
-    'cloudinary',
-    
 ]
 
 CLOUDINARY_STORAGE = {
@@ -96,10 +96,8 @@ import dj_database_url
 # settings.py এর নিচের অংশটি এভাবে আপডেট করতে পারেন
 DATABASES = {
     'default': dj_database_url.config(
-        # আপনার পিসিতে যদি PostgreSQL থাকে তবে নিচের ফরম্যাটে URL দিন
-        # default='postgres://username:password@localhost:5432/db_name',
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600
+        # Render-এ DATABASE_URL থাকলে সেটি নেবে, না থাকলে লোকাল sqlite ব্যবহার করবে
+        default=os.environ.get('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}")
     )
 }
 
