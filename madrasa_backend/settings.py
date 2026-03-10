@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'api',
+    'whitenoise.runserver_nostatic',
+    
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,9 +82,12 @@ WSGI_APPLICATION = 'madrasa_backend.wsgi.application'
 import dj_database_url
 
 
+# settings.py এর নিচের অংশটি এভাবে আপডেট করতে পারেন
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///db.sqlite3',
+        # আপনার পিসিতে যদি PostgreSQL থাকে তবে নিচের ফরম্যাটে URL দিন
+        # default='postgres://username:password@localhost:5432/db_name',
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600
     )
 }
@@ -123,6 +128,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # এটি যোগ করুন
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -131,7 +138,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://markaz-sepia.vercel.app/"
+    "https://markaz-sepia.vercel.app",
     
 ]
 
@@ -139,3 +146,5 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
