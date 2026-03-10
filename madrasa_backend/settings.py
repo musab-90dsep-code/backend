@@ -60,8 +60,7 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
+
 
 
 CLOUDINARY_STORAGE = {

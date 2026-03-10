@@ -18,12 +18,10 @@ def get_all_content(request):
 
     return Response({
         "notices": NoticeSerializer(notices, many=True).data,
-        "news": NewsSerializer(news, many=True).data,
-        "contents": ContentSerializer(contents, many=True).data,
+        "news": NewsSerializer(news, many=True, context={'request': request}).data, # context যোগ করা হয়েছে
+        "contents": ContentSerializer(contents, many=True, context={'request': request}).data, # context যোগ করা হয়েছে
         "videos": VideoSerializer(videos, many=True, context={'request': request}).data,
-        "stats": StatsSerializer(stats, many=True).data, # এখানে নতুন কি (key) যোগ করুন
+        "stats": StatsSerializer(stats, many=True).data,
         "teachers": TeacherSerializer(teachers, many=True, context={'request': request}).data,
         "events": EventSerializer(events, many=True, context={'request': request}).data,
-    
     })
-    
