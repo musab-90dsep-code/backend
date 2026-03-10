@@ -55,9 +55,12 @@ STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
+}
+
+# Eta force korbe jate protibari unique name create hoy
+CLOUDINARY_STORAGE = {
+    'PREFIX': 'media/',
+    'AUTOCREATE_FOLDERS': True,
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
