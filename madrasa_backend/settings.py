@@ -41,8 +41,19 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
     'whitenoise.runserver_nostatic',
+    'cloudinary_storage',
+    'cloudinary',
     
 ]
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'Root',
+    'API_KEY': '261654671494271',
+    'API_SECRET': '335PDeeHbvab6MLWaGvpWOw3wJQ',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
