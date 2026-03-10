@@ -48,8 +48,8 @@ INSTALLED_APPS = [
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dh2pky0qd',
-    'API_KEY': '261654671494271',
-    'API_SECRET': '335PDeeHbvab6MLWaGvpWOw3wJQ',
+    'API_KEY': '918767924793841',
+    'API_SECRET': 'wa63IYX00aheZ7V4srVhAjbhV2Q',
     'TIMEOUT': 60,
 }
 STORAGES = {
@@ -60,6 +60,9 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticCloudinaryStorage'
+
 
 CLOUDINARY_STORAGE = {
     'PREFIX': 'media/',
