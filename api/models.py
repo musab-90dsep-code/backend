@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Notice(models.Model):
@@ -13,7 +14,7 @@ class Notice(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=255)
     date = models.DateField()
-    image_url = models.ImageField(upload_to='content/', max_length=None, blank=True, null=True)
+    image_url = CloudinaryField('image', blank=True, null=True)
     content = models.TextField(verbose_name="Detailed News", blank=True, null=True)
 
     def __str__(self):
@@ -22,7 +23,7 @@ class News(models.Model):
 
 class Content(models.Model):
     title = models.CharField(max_length=255)
-    image_url = models.ImageField(upload_to='content/', max_length=5000)
+    image_url = CloudinaryField('image', blank=True, null=True)
 
     def __str__(self):
         return self.title
