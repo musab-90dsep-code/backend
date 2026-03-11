@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic', # এখানে রাখা নিরাপদ
-    'django.contrib.staticfiles',
-    'cloudinary',
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',  # staticfiles এর পরে cloudinary দিন
+    'cloudinary', 
     'rest_framework',
     'corsheaders',
     'api',
@@ -51,8 +51,6 @@ CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dh2pky0qd',
     'API_KEY': '918767924793841',
     'API_SECRET': 'wa63IYX00aheZ7V4srVhAjbhV2Q',
-    'TIMEOUT': 60,
-    'PREFIX': 'media/', # ফোল্ডার প্রিফিক্স
 }
 
 STORAGES = {
@@ -66,7 +64,7 @@ STORAGES = {
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://res.cloudinary.com/dh2pky0qd/'
 # Cloudinary ব্যবহার করলে MEDIA_ROOT লোকালি দরকার নেই, তবে রাখা ভালো
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
