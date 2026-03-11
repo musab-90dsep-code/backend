@@ -61,7 +61,7 @@ class InstitutionStats(models.Model):
     
 class Teacher(models.Model):
     # Teacher er chobi
-    image = CloudinaryField('image', blank=True, null=True, verbose_name="Teacher Photo")
+    image = CloudinaryField('image', blank=True, null=True)
     
     # Name field (Dui bhashay)
     name_en = models.CharField(max_length=255, verbose_name="Name (English)")
@@ -86,13 +86,17 @@ class Teacher(models.Model):
 
 class Event(models.Model):
     # ইভেন্টের ছবি
-    image = CloudinaryField('image', blank=True, null=True, verbose_name="Event Photo")
+    image = CloudinaryField(
+        blank=True,
+        null=True,
+        verbose_name="Event Photo"
+    )
     
     # শিরোনাম (বাংলা ও ইংরেজি)
     title_en = models.CharField(max_length=255, verbose_name="Title (English)")
     title_bn = models.CharField(max_length=255, verbose_name="Title (Bangla)")
     
-    # তারিখ, সময় এবং স্থান (এগুলোও ট্রান্সলেট করা যায়)
+    # তারিখ, সময় এবং স্থান
     date_en = models.CharField(max_length=100, verbose_name="Date (English)")
     date_bn = models.CharField(max_length=100, verbose_name="Date (Bangla)")
     
