@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,18 +33,18 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary_storage', # এটি সবার উপরে থাকবে
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles', # এটি cloudinary_storage এর নিচে
+    'whitenoise.runserver_nostatic', # এখানে রাখা নিরাপদ
+    'django.contrib.staticfiles',
     'cloudinary',
     'rest_framework',
     'corsheaders',
     'api',
-    'whitenoise.runserver_nostatic',
 ]
 
 CLOUDINARY_STORAGE = {
@@ -51,7 +52,9 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '918767924793841',
     'API_SECRET': 'wa63IYX00aheZ7V4srVhAjbhV2Q',
     'TIMEOUT': 60,
+    'PREFIX': 'media/', # ফোল্ডার প্রিফিক্স
 }
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -60,13 +63,12 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-
-CLOUDINARY_STORAGE = {
-    'PREFIX': 'media/',
-    'AUTOCREATE_FOLDERS': True,
-}
+MEDIA_URL = '/media/'
+# Cloudinary ব্যবহার করলে MEDIA_ROOT লোকালি দরকার নেই, তবে রাখা ভালো
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
 
 MIDDLEWARE = [
@@ -104,7 +106,7 @@ WSGI_APPLICATION = 'madrasa_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import dj_database_url
+
 
 
 # settings.py এর নিচের অংশটি এভাবে আপডেট করতে পারেন
@@ -150,9 +152,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # এটি যোগ করুন
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -167,7 +167,5 @@ CORS_ALLOWED_ORIGINS = [
 
 
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
