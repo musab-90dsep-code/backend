@@ -65,7 +65,7 @@ STORAGES = {
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-MEDIA_URL = 'https://res.cloudinary.com/dh2pky0qd/'
+MEDIA_URL = '/media/'  # Cloudinary ব্যবহার করলে MEDIA_URL দরকার, তবে MEDIA_ROOT লোকালি দরকার নেই
 # Cloudinary ব্যবহার করলে MEDIA_ROOT লোকালি দরকার নেই, তবে রাখা ভালো
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
 
