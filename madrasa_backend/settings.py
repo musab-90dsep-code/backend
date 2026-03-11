@@ -58,11 +58,13 @@ STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
     },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
 }
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-
-MEDIA_URL = '/media/'  # Cloudinary ব্যবহার করলে MEDIA_URL দরকার, তবে MEDIA_ROOT লোকালি দরকার নেই
-# Cloudinary ব্যবহার করলে MEDIA_ROOT লোকালি দরকার নেই, তবে রাখা ভালো
 
 
 
