@@ -17,6 +17,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
 
 class ContentSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
     class Meta:
         model = Content
         fields = '__all__'
