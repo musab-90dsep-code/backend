@@ -31,6 +31,7 @@ class Content(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=200, blank=True)
     video_url = models.URLField(help_text="YouTube or Video Link")
+    
 
     def __str__(self):
         return self.title
@@ -60,7 +61,7 @@ class InstitutionStats(models.Model):
     
 class Teacher(models.Model):
     # Teacher er chobi
-    image = models.ImageField(upload_to='teachers/', verbose_name="Teacher Photo")
+    image = CloudinaryField('image', blank=True, null=True, verbose_name="Teacher Photo")
     
     # Name field (Dui bhashay)
     name_en = models.CharField(max_length=255, verbose_name="Name (English)")
@@ -85,7 +86,7 @@ class Teacher(models.Model):
 
 class Event(models.Model):
     # ইভেন্টের ছবি
-    image = models.ImageField(upload_to='events/', verbose_name="Event Photo")
+    image = CloudinaryField('image', blank=True, null=True, verbose_name="Event Photo")
     
     # শিরোনাম (বাংলা ও ইংরেজি)
     title_en = models.CharField(max_length=255, verbose_name="Title (English)")
