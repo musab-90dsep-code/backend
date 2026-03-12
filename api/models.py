@@ -61,7 +61,7 @@ class InstitutionStats(models.Model):
     
 class Teacher(models.Model):
     # Teacher er chobi
-    image = CloudinaryField('image', blank=True, null=True)
+    image_url = CloudinaryField('image', blank=True, null=True)
     
     # Name field (Dui bhashay)
     name_en = models.CharField(max_length=255, verbose_name="Name (English)")
@@ -86,7 +86,7 @@ class Teacher(models.Model):
 
 class Event(models.Model):
     # ইভেন্টের ছবি
-    image = CloudinaryField(
+    image_url = CloudinaryField(
         blank=True,
         null=True,
         verbose_name="Event Photo"
