@@ -8,16 +8,13 @@ class NoticeSerializer(serializers.ModelSerializer):
 
 class NewsSerializer(serializers.ModelSerializer):
     # image_url কে ফুল লিঙ্কে রূপান্তর করার জন্য SerializerMethodField ব্যবহার
-    image_url = serializers.SerializerMethodField()
+
 
     class Meta:
         model = News
         fields = '__all__'
 
-    def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
-        return None
+
 
 class ContentSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField()
@@ -43,21 +40,14 @@ class StatsSerializer(serializers.ModelSerializer):
         fields = '__all__'     
 
 class TeacherSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Teacher
         fields = '__all__' 
-    def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
-        return None            
+       
 
 class EventSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
     class Meta:
         model = Event
         fields = '__all__'
-    def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
-        return None
+

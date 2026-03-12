@@ -1,5 +1,6 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
+from django.forms import Field
 
 
 class Notice(models.Model):
@@ -86,11 +87,7 @@ class Teacher(models.Model):
 
 class Event(models.Model):
     # ইভেন্টের ছবি
-    image_url = CloudinaryField(
-        blank=True,
-        null=True,
-        verbose_name="Event Photo"
-    )
+    image_url = CloudinaryField('image', blank=True, null=True)
     
     # শিরোনাম (বাংলা ও ইংরেজি)
     title_en = models.CharField(max_length=255, verbose_name="Title (English)")
