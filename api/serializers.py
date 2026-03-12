@@ -7,7 +7,6 @@ class NoticeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class NewsSerializer(serializers.ModelSerializer):
-    # image_url কে ফুল লিঙ্কে রূপান্তর করার জন্য SerializerMethodField ব্যবহার
     image_url = serializers.SerializerMethodField()
 
     class Meta:
@@ -15,8 +14,12 @@ class NewsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
+        try:
+            if obj.image_url:
+                return obj.image_url.url
+        except Exception:
+            # যদি ইমেজে কোনো সমস্যা থাকে, তাহলে সার্ভার ক্র্যাশ না করে None রিটার্ন করবে
+            return None
         return None
 
 class ContentSerializer(serializers.ModelSerializer):
@@ -26,10 +29,42 @@ class ContentSerializer(serializers.ModelSerializer):
         model = Content
         fields = '__all__'
     
-    # এই ফাংশনটি Meta ক্লাসের বাইরে থাকবে (ইন্ডেন্টেশন খেয়াল করুন)
     def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
+        try:
+            if obj.image_url:
+                return obj.image_url.url
+        except Exception:
+            return None
+        return None
+
+class TeacherSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Teacher
+        fields = '__all__' 
+       
+    def get_image_url(self, obj):
+        try:
+            if obj.image_url:
+                return obj.image_url.url
+        except Exception:
+            return None
+        return None
+
+class EventSerializer(serializers.ModelSerializer):
+    image_url = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+    def get_image_url(self, obj):
+        try:
+            if obj.image_url:
+                return obj.image_url.url
+        except Exception:
+            return None
         return None
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -40,24 +75,4 @@ class VideoSerializer(serializers.ModelSerializer):
 class StatsSerializer(serializers.ModelSerializer):
     class Meta:
         model = InstitutionStats
-        fields = '__all__'     
-
-class TeacherSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-    class Meta:
-        model = Teacher
-        fields = '__all__' 
-    def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
-        return None            
-
-class EventSerializer(serializers.ModelSerializer):
-    image_url = serializers.SerializerMethodField()
-    class Meta:
-        model = Event
         fields = '__all__'
-    def get_image_url(self, obj):
-        if obj.image_url:
-            return obj.image_url.url
-        return None
