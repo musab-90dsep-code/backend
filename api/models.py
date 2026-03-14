@@ -29,14 +29,23 @@ class Content(models.Model):
     def __str__(self):
         return self.title
     
+import re
+
 class Video(models.Model):
     title = models.CharField(max_length=200, blank=True)
     video_url = models.URLField(help_text="YouTube or Video Link")
-    
+
+    def get_thumbnail_url(self):
+        # ইউটিউব ভিডিও আইডি এক্সট্র্যাক্ট করার জন্য রেগুলার এক্সপ্রেশন
+        video_id_match = re.search(r'(?:v=|\/)([0-9A-Za-z_-]{11}).*', self.video_url)
+        if video_id_match:
+            video_id = video_id_match.group(1)
+            # ইউটিউবের হাই কোয়ালিটি থাম্বনেইল ইউআরএল
+            return f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+        return None # অন্য কোনো প্ল্যাটফর্ম হলে বা আইডি না পেলে
 
     def __str__(self):
         return self.title
-    
     
 class InstitutionStats(models.Model):
     # আইকন চেনার জন্য একটি ছোট নাম (যেমন: students, teachers, results)
