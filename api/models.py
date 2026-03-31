@@ -31,11 +31,20 @@ class Content(models.Model):
     
 class Video(models.Model):
     title = models.CharField(max_length=200, blank=True)
-    video_url = CloudinaryField(help_text="YouTube or Video Link")
     
+    # এখানে 'video' এবং resource_type='video' যোগ করতে হবে
+    video_url = CloudinaryField('video', resource_type='video', help_text="Upload Video (mp4, etc.)", blank=True, null=True)
 
     def __str__(self):
         return self.title
+        
+    # Cloudinary থেকে অটোমেটিক থাম্বনেইল বের করার ফাংশন
+    def get_thumbnail_url(self):
+        if self.video_url:
+            import os
+            base_url, ext = os.path.splitext(self.video_url.url)
+            return f"{base_url}.jpg"
+        return None
     
     
 class InstitutionStats(models.Model):
