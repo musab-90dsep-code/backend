@@ -68,9 +68,23 @@ class EventSerializer(serializers.ModelSerializer):
         return None
 
 class VideoSerializer(serializers.ModelSerializer):
+    # এই লাইনটি যোগ করতে হবে
+    video_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Video
         fields = '__all__'
+
+    # এই ফাংশনটি Cloudinary থেকে সম্পূর্ণ লিংক বের করে আনবে
+    def get_video_url(self, obj):
+        try:
+            if obj.video_url:
+                if hasattr(obj.video_url, 'url'):
+                    return obj.video_url.url
+                return str(obj.video_url)
+        except Exception:
+            return None
+        return None
 
 class StatsSerializer(serializers.ModelSerializer):
     class Meta:
