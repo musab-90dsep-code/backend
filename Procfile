@@ -1,0 +1,1 @@
+web: gunicorn madrasa_backend.wsgi
